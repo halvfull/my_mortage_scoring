@@ -2,12 +2,17 @@ from flask import Flask, jsonify, request
 import mysql.connector
 from mysql.connector import errorcode
 from flaskext.mysql import MySQL
-
+from sqlalchemy import insert, Table, Column, Integer, String
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base
+from flask_sqlalchemy import SQLAlchemy
 
 
 
 # IMPORT THE SQALCHEMY LIBRARY's CREATE_ENGINE METHOD
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
+
+
 
 # DEFINE THE DATABASE CREDENTIALS
 user = 'sqladmin'
@@ -16,34 +21,67 @@ host = 'mortagescoringsqlserver.database.windows.net'
 port = 1433
 database = 'MortageScoringDB'
 
-# PYTHON FUNCTION TO CONNECT TO THE MYSQL DATABASE AND
-# RETURN THE SQLACHEMY ENGINE OBJECT
-
-app = Flask(__name__)
-
 def get_connection():
 	return create_engine(
 		url="mysql+pymysql://{0}:{1}@{2}:{3}/{4}".format(
 			user, password, host, port, database
 		)
+          
 	)
 
 
-if __name__ == '__main__':
+"""
+# PYTHON FUNCTION TO CONNECT TO THE MYSQL DATABASE AND
+# RETURN THE SQLACHEMY ENGINE OBJECT
 
-	try:
-	
+engine = create_engine(
+		url="mysql+pymysql://{0}:{1}@{2}:{3}/{4}".format(
+			user, password, host, port, database), echo = True)
+base = declarative_base()
+class person(base):
+    __tablename__='people'
+    name = Column(String, primary_key=True)
+    age = Column(Integer)
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+Session = sessionmaker(bind=engine)
+session = Session()
+a_person = person('personnavnet', 22)
+session.add(a_person)
+session.commit()
+"""
+"""base = declarative_base()
+
+
+
+base.metadata.create_all(engine)
+"""
+app = Flask(__name__)
+db=SQLAlchemy(app)
+app.config["SQLALCHEMY_DATABASE_URI"]=host
+
+try:
 		# GET THE CONNECTION OBJECT (ENGINE) FOR THE DATABASE
-		engine = get_connection()
-		print(
-			f"Connection to the {host} for user {user} created successfully.")
-	except Exception as ex:
-		print("Connection could not be made due to the following error: \n", ex)
+	engine = get_connection()
+	print(f"Connection to the {host} for user {user} created successfully.")
+    
+except Exception as ex:
+	print("Connection could not be made due to the following error: \n", ex)
+        
+with app.app_context():
+    db.create_all()
 
+class person(db.Model):
+    __tablename__='people'
+    name = db.Column(String, primary_key=True)
+    age = db.Column(Integer)
 
-
-
-
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
 
 
