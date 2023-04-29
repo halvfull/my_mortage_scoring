@@ -15,9 +15,7 @@ cnxn = pyodbc.connect(
     user='sqladmin',
     tds_version='7.4',
     password="Fridayfun123",
-    port=1433,
-    driver='FreeTDS'
-)
+    port=1433)
 
 
 """
