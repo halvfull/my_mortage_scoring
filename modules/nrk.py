@@ -10,10 +10,12 @@ class Customer(db.Model):
 @app.route('/code')
 def code():
   with app.app_context():
-      db.create_all()
 
+    db.create_all()
+    exists = Customer.query.filter_by(ssn=12233).first()
+    if not exists:
       db.session.add(Customer(ssn=12233, first_name="ingrid"))
       db.session.commit()
-
-      users = db.session.execute(db.select(Customer)).scalars()
-  return redirect('https://nrk.no')
+  
+      #users = db.session.execute(db.select(Customer)).scalars()
+    return redirect('https://nrk.no')
