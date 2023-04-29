@@ -3,20 +3,48 @@ import mysql.connector
 from mysql.connector import errorcode
 from flaskext.mysql import MySQL
 
-import pyodbc
 
+
+
+# IMPORT THE SQALCHEMY LIBRARY's CREATE_ENGINE METHOD
+from sqlalchemy import create_engine
+
+# DEFINE THE DATABASE CREDENTIALS
+user = 'sqladmin'
+password = 'Fridayfun123'
+host = 'mortagescoringsqlserver.database.windows.net'
+port = 1433
+database = 'MortageScoringDB'
+
+# PYTHON FUNCTION TO CONNECT TO THE MYSQL DATABASE AND
+# RETURN THE SQLACHEMY ENGINE OBJECT
 
 app = Flask(__name__)
 
+def get_connection():
+	return create_engine(
+		url="mysql+pymysql://{0}:{1}@{2}:{3}/{4}".format(
+			user, password, host, port, database
+		)
+	)
 
-cnxn = pyodbc.connect(
-    server="mortagescoringsqlserver.database.windows.net",
-    database="MortageScoringDB",
-    user='sqladmin',
-    password="Fridayfun123",
-    port=1433,
-    driver='{SQL Server};'
-)
+
+if __name__ == '__main__':
+
+	try:
+	
+		# GET THE CONNECTION OBJECT (ENGINE) FOR THE DATABASE
+		engine = get_connection()
+		print(
+			f"Connection to the {host} for user {user} created successfully.")
+	except Exception as ex:
+		print("Connection could not be made due to the following error: \n", ex)
+
+
+
+
+
+
 
 
 """
