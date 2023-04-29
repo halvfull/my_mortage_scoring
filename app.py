@@ -13,9 +13,10 @@ cnxn = pyodbc.connect(
     server="mortagescoringsqlserver.database.windows.net",
     database="MortageScoringDB",
     user='sqladmin',
-    tds_version='7.4',
     password="Fridayfun123",
-    port=1433)
+    port=1433,
+    driver='{SQL Server};'
+)
 
 
 """
