@@ -1,6 +1,42 @@
 from flask import Flask, jsonify, request
+import mysql.connector
+from mysql.connector import errorcode
+from flaskext.mysql import MySQL
+
+import pyodbc
+
 
 app = Flask(__name__)
+
+
+cnxn = pyodbc.connect(
+    server="mortagescoringsqlserver.database.windows.net",
+    database="MortageScoringDB",
+    user='sqladmin',
+    tds_version='7.4',
+    password="Fridayfun123",
+    port=1433,
+    driver='FreeTDS'
+)
+
+
+"""
+try:
+    cnx = mysql.connector.connect(user='sqladmin', password='Fridayfun123',
+                                host='mortagescoringsqlserver.database.windows.net',
+                                database='MortageScoringDB',
+                                port=1403)
+    cnx.close()
+except mysql.connector.Error as err:
+  if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+    print("Something is wrong with your user name or password")
+  elif err.errno == errorcode.ER_BAD_DB_ERROR:
+    print("Database does not exist")
+  else:
+    print(err)
+else:
+  cnx.close()
+"""
 
 
 @app.route('/')
