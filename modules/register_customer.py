@@ -1,6 +1,6 @@
 # Import Libraries 
 from app import app, db
-from flask import request, render_template
+from flask import request, render_template, redirect, url_for
 from mymodels import Customer
 
 #checks if user exists in DB
@@ -49,6 +49,6 @@ def registerer_cust():
             cust = Customer(customerSSN=customerSSN, fullName=fullName, loanAmount=loanAmount, equityAmount=equityAmount, salaryAmount=salaryAmount)
             db.session.add(cust)
             db.session.commit()
-            return f"Successfully registered new user: {cust.fullName} with ssn: {cust.customerSSN}"
+            return redirect(url_for('scoring', customerSSN=customerSSN))
     else:
         return render_template('register.html')

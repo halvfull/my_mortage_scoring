@@ -5,11 +5,10 @@
   </head>
   <body>
     <h1>Loan Scoring Application</h1>
+    <h2>{{ loan_amount }}</h2>
     <form method="post">
-      <label for="customerSSN">Customer SSN:</label>
-      <input type="text" id="customerSSN" name="customerSSN" required>
-      <br>
-      <input type="submit" value="Apply for Loan">
+      <button type="submit" name="action" value="accept">Accept Loan</button>
+      <button type="submit" name="action" value="deny">Deny Loan</button>
     </form>
   </body>
 </html>
