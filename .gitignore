@@ -2,3 +2,7 @@ app2.py
 db3.py
 app_old.py
 __pycache__/
+modules/nrk.py
+modules/vg.py
+first_customer.py
+instance

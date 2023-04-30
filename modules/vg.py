@@ -1,7 +1,7 @@
 # Import Libraries 
 from app import app, db
 from flask import redirect
-from modules.nrk import Customer
+from mymodels import Customer
 
 
 @app.route('/jak')
