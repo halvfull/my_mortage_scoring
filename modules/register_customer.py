@@ -9,7 +9,7 @@ def get_user_by_ssn(customerSSN):
    return customer
 
 
-@app.route('/register', methods= ['POST'])
+@app.route('/register', methods= ['GET', 'POST'])
 def register_customer():
    customerSSN = request.args.get('customerSSN')
    fullName = request.args.get('fullName')
