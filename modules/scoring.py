@@ -21,7 +21,6 @@ def calculate_score(loanAmount, equityAmount, salaryAmount):
     return scorepoint
 
 
-''' ''' 
 @app.route('/scoring', methods=['GET', 'POST'])
 def scoring():
     if request.method == 'POST':
@@ -35,11 +34,15 @@ def scoring():
             db.session.add(score)
             db.session.commit()
             if scorepoints >= 5:
-                loan = Loan(customerSSN=customerSSN, loanAmount=cust.loanAmount, scorepoints=scorepoints)
-                loan.score_id = score.id  # set the score_id to the id of the newly created Score object
-                db.session.add(loan)
-                db.session.commit()
-                return f"Loan granted to {cust.fullName} with ssn: {customerSSN}. Loan details: loanAmount={cust.loanAmount}. Score points: {scorepoints}.  "
+                if request.form['action'] == 'accept':
+                    loan = Loan(customerSSN=customerSSN, loanAmount=cust.loanAmount, scorepoints=scorepoints, score_id=score.id)
+                    db.session.add(loan)
+                    db.session.commit()
+                    return f"Loan granted to {cust.fullName} with ssn: {customerSSN}. Loan details: loanAmount={cust.loanAmount}. Score points: {scorepoints}.  "
+                if ['action'] == 'decline':
+                    return "Loan denied "
+                else:
+                    return f"Loan application rejected for {cust.fullName} with ssn: {customerSSN}. Score points: {scorepoints}."
             else:
                 return f"Loan application rejected for {cust.fullName} with ssn: {customerSSN}. Score points: {scorepoints}."
     else:
