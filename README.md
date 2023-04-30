@@ -1,5 +1,5 @@
 My Mortgage Scoring App
-This is a web application for a simplified  loan scoring applications. It allows users to enter their personal and financial information and get an automated score that indicates whether they are likely to qualify for a loan. The application is built using Flask and SQLAlchemy and is hosted on Azure.
+This is a web application for a simplified  loan scoring applications. It allows users to enter their personal and financial information and get an automated score that indicates whether they are likely to qualify for a loan. The application is built using Flask, SQLAlchemy, and SQLite and is hosted on Azure.
 
 Deployment
 The application is deployed on Azure and is automatically updated whenever changes are made to the repository. You can access the deployed application at the following URL:
