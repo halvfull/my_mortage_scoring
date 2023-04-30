@@ -11,8 +11,9 @@ class Customer(db.Model):
 
 class Loan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customer.customerSSN'))
-    score = db.Column(db.Integer, nullable=False) 
+    customerSSN = db.Column(db.Integer, db.ForeignKey('customer.customerSSN'))
+    loanAmount = db.Column(db.Float, nullable=False)
+    scorepoints = db.Column(db.Integer, nullable=False) 
 
 
 class Score(db.Model):
