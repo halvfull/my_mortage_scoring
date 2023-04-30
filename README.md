@@ -10,7 +10,7 @@ To install and run the application, follow these steps:
 
  1. Clone the repository
  2. Install the required dependencies by running pip install -r requirements.txt
- 3. Start the application by running python app.py
+ 3. Start the application by running python run.py
  4. Navigate to http://localhost:5000/ in your browser to access the application
   
   
