@@ -27,5 +27,5 @@ https://mymortagescoringapp.azurewebsites.net/
 To use the application, follow these steps:
 
 Register a new customer as by entering your SSN, Full name, Loan amount, Equity amount and Salary amount.
-
+(Note, please do not submit any sensitive data, as real SSN)
 Click the "Submit" button and choose to accept or decline the loan. If your score is above a certain threshold, you will be offered a loan. It will grant the loan and store the loan in the database, if you click accept. If you click decline, only the score will be stored.
